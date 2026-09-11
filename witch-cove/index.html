@@ -5,44 +5,51 @@
     <link rel="icon" type="image/svg+xml" href="/witch-cove/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Witch Cove — Measure the Tide Charm</title>
-    <script type="module" crossorigin src="/witch-cove/assets/index-BE_hIbGk.js"></script>
-    <link rel="stylesheet" crossorigin href="/witch-cove/assets/index-CMFPp8vc.css">
+    <script type="module" crossorigin src="/witch-cove/assets/index-C8blWGm0.js"></script>
+    <link rel="stylesheet" crossorigin href="/witch-cove/assets/index-I8aUYGqz.css">
   </head>
   <body>
     <div id="app">
       <canvas id="game-canvas"></canvas>
 
-      <!-- Thin HUD -->
       <div id="hud">
-        <div id="xp-panel" class="hud-panel">
-          <div id="xp-label">XP <span id="xp-value">0</span> / <span id="xp-max">2000</span></div>
-          <div id="xp-bar"><div id="xp-fill"></div></div>
+        <div id="hud-top">
+          <div id="xp-panel" class="hud-panel">
+            <div id="xp-label">XP <span id="xp-value">0</span> / <span id="xp-max">14000</span></div>
+            <div id="xp-bar"><div id="xp-fill"></div></div>
+          </div>
+
+          <div id="quest-line" class="hud-panel">
+            <span class="quest-star" aria-hidden="true">✦</span>
+            <span id="quest-text">Measure the Tide Charm</span>
+            <span id="quest-progress">0 / 100</span>
+          </div>
+
+          <div id="hud-top-right">
+            <div id="tide-gauge" class="hud-panel">
+              <div class="tide-label">TIDE</div>
+              <div id="tide-bar"><div id="tide-fill"></div></div>
+              <div id="tide-level">LOW</div>
+            </div>
+            <div id="hp-panel" class="hud-panel" aria-live="polite">
+              <div class="hp-label">HEARTS</div>
+              <div id="hp-hearts" aria-label="Hearts 3 of 3">♥♥♥</div>
+            </div>
+          </div>
         </div>
 
-        <div id="quest-line" class="hud-panel">
-          <span class="quest-star" aria-hidden="true">✦</span>
-          <span id="quest-text">Measure the Tide Charm</span>
-          <span id="quest-progress">0 / 16</span>
-        </div>
-
-        <div id="tide-gauge" class="hud-panel">
-          <div class="tide-label">TIDE</div>
-          <div id="tide-bar"><div id="tide-fill"></div></div>
-          <div id="tide-level">LOW</div>
-        </div>
-
-        <div id="hp-panel" class="hud-panel" aria-live="polite">
-          <div class="hp-label">HEARTS</div>
-          <div id="hp-hearts" aria-label="Hearts 3 of 3">♥♥♥</div>
-        </div>
       </div>
 
-      <button id="wardrobe-btn" type="button" title="Wardrobe">Wardrobe</button>
+      <div id="chrome-bottom">
+        <button id="wardrobe-btn" type="button" title="Wardrobe">Wardrobe</button>
+        <div id="chrome-bottom-center">
+          <div id="toast" hidden></div>
+          <button id="measure-btn" type="button" hidden>Measure</button>
+          <div id="hint">Tap the ground to walk the hills · Approach a glow to Measure</div>
+        </div>
+        <div id="chrome-bottom-spacer" aria-hidden="true"></div>
+      </div>
 
-      <!-- Near-pool Measure affordance -->
-      <button id="measure-btn" type="button" hidden>Measure</button>
-
-      <!-- Measure modal (charm beat) -->
       <div id="measure-modal" hidden>
         <div class="modal-card">
           <h2 id="modal-title">Tide Charm</h2>
@@ -73,21 +80,15 @@
         </div>
       </div>
 
-      <!-- Celebrate toast -->
-      <div id="toast" hidden></div>
-
-      <!-- Quest complete overlay -->
       <div id="win-overlay" hidden>
         <div class="win-card">
           <h1>Tide Charm Complete!</h1>
-          <p>You measured all the cove charms.</p>
+          <p>You measured the long hill path and every cove charm.</p>
           <p class="win-xp">+300 XP</p>
           <button id="win-wardrobe-btn" type="button" class="btn-secondary">Wardrobe</button>
           <button id="play-again-btn" type="button">Play again</button>
         </div>
       </div>
-
-      <div id="hint">Tap the ground to walk (camera follows) · Approach a glowing pool to Measure</div>
     </div>
   </body>
 </html>
