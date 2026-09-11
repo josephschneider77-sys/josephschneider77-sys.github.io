@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/witch-cove/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Witch Cove — Measure the Tide Charm</title>
+    <script type="module" crossorigin src="/witch-cove/assets/index-DzTP9Wgj.js"></script>
+    <link rel="stylesheet" crossorigin href="/witch-cove/assets/index--3QDmdIp.css">
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="game-canvas"></canvas>
+
+      <!-- Thin HUD -->
+      <div id="hud">
+        <div id="xp-panel" class="hud-panel">
+          <div id="xp-label">XP <span id="xp-value">0</span> / <span id="xp-max">2000</span></div>
+          <div id="xp-bar"><div id="xp-fill"></div></div>
+        </div>
+
+        <div id="quest-line" class="hud-panel">
+          <span class="quest-star" aria-hidden="true">✦</span>
+          <span id="quest-text">Measure the Tide Charm</span>
+          <span id="quest-progress">0 / 3</span>
+        </div>
+
+        <div id="tide-gauge" class="hud-panel">
+          <div class="tide-label">TIDE</div>
+          <div id="tide-bar"><div id="tide-fill"></div></div>
+          <div id="tide-level">LOW</div>
+        </div>
+      </div>
+
+      <!-- Near-pool Measure affordance -->
+      <button id="measure-btn" type="button" hidden>Measure</button>
+
+      <!-- Measure modal (charm beat) -->
+      <div id="measure-modal" hidden>
+        <div class="modal-card">
+          <h2 id="modal-title">Tide Charm</h2>
+          <p id="modal-question"></p>
+          <div id="modal-choices"></div>
+          <div class="modal-actions">
+            <button id="skip-btn" type="button" class="btn-secondary">Skip</button>
+          </div>
+          <p id="modal-feedback" class="feedback" hidden></p>
+        </div>
+      </div>
+
+      <!-- Celebrate toast -->
+      <div id="toast" hidden></div>
+
+      <!-- Quest complete overlay -->
+      <div id="win-overlay" hidden>
+        <div class="win-card">
+          <h1>Tide Charm Complete!</h1>
+          <p>You measured all three tide pools. The cove glows with your charm.</p>
+          <p class="win-xp">+300 XP</p>
+          <button id="play-again-btn" type="button">Play again</button>
+        </div>
+      </div>
+
+      <div id="hint">Tap or click the ground to walk · Approach a glowing pool to Measure</div>
+    </div>
+  </body>
+</html>
