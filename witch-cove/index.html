@@ -5,8 +5,8 @@
     <link rel="icon" type="image/svg+xml" href="/witch-cove/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Witch Cove — Measure the Tide Charm</title>
-    <script type="module" crossorigin src="/witch-cove/assets/index-BQvMRFmF.js"></script>
-    <link rel="stylesheet" crossorigin href="/witch-cove/assets/index-MSf5m9tR.css">
+    <script type="module" crossorigin src="/witch-cove/assets/index-CAFt_THM.js"></script>
+    <link rel="stylesheet" crossorigin href="/witch-cove/assets/index-CMFPp8vc.css">
   </head>
   <body>
     <div id="app">
@@ -22,7 +22,7 @@
         <div id="quest-line" class="hud-panel">
           <span class="quest-star" aria-hidden="true">✦</span>
           <span id="quest-text">Measure the Tide Charm</span>
-          <span id="quest-progress">0 / 7</span>
+          <span id="quest-progress">0 / 16</span>
         </div>
 
         <div id="tide-gauge" class="hud-panel">
@@ -30,7 +30,14 @@
           <div id="tide-bar"><div id="tide-fill"></div></div>
           <div id="tide-level">LOW</div>
         </div>
+
+        <div id="hp-panel" class="hud-panel" aria-live="polite">
+          <div class="hp-label">HEARTS</div>
+          <div id="hp-hearts" aria-label="Hearts 3 of 3">♥♥♥</div>
+        </div>
       </div>
+
+      <button id="wardrobe-btn" type="button" title="Wardrobe">Wardrobe</button>
 
       <!-- Near-pool Measure affordance -->
       <button id="measure-btn" type="button" hidden>Measure</button>
@@ -41,10 +48,28 @@
           <h2 id="modal-title">Tide Charm</h2>
           <p id="modal-question"></p>
           <div id="modal-choices"></div>
+          <div id="modal-spelling" hidden>
+            <input id="spell-input" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="24" />
+            <button id="spell-submit" type="button">Check</button>
+          </div>
           <div class="modal-actions">
             <button id="skip-btn" type="button" class="btn-secondary">Skip</button>
           </div>
           <p id="modal-feedback" class="feedback" hidden></p>
+        </div>
+      </div>
+
+      <div id="wardrobe-panel" hidden>
+        <div class="wardrobe-card">
+          <h2>Wardrobe</h2>
+          <p class="wardrobe-note">Earned along the path · no shop</p>
+          <h3>Cloak</h3>
+          <div id="wardrobe-cloak" class="wardrobe-row"></div>
+          <h3>Tunic</h3>
+          <div id="wardrobe-clothes" class="wardrobe-row"></div>
+          <h3>Hat</h3>
+          <div id="wardrobe-hat" class="wardrobe-row"></div>
+          <button id="wardrobe-close" type="button" class="btn-secondary">Close</button>
         </div>
       </div>
 
@@ -57,6 +82,7 @@
           <h1>Tide Charm Complete!</h1>
           <p>You measured all the cove charms.</p>
           <p class="win-xp">+300 XP</p>
+          <button id="win-wardrobe-btn" type="button" class="btn-secondary">Wardrobe</button>
           <button id="play-again-btn" type="button">Play again</button>
         </div>
       </div>
