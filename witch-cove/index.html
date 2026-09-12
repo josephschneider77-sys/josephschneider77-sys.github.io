@@ -5,15 +5,31 @@
     <link rel="icon" type="image/svg+xml" href="/witch-cove/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Witch Cove — Measure the Tide Charm</title>
-    <script type="module" crossorigin src="/witch-cove/assets/index-BzN_GhjB.js"></script>
-    <link rel="stylesheet" crossorigin href="/witch-cove/assets/index-DgXo495Q.css">
+    <style>html,body{color:#fff8e8;background:#1a1230;height:100%;margin:0;font-family:Segoe UI,system-ui,-apple-system,sans-serif;overflow:hidden}body:not(.is-playable) #hud,body:not(.is-playable) #chrome-bottom{display:none!important}#boot-screen{z-index:2000;pointer-events:auto;touch-action:auto;background:radial-gradient(at 50% 18%,#f0d78c38,#0000 42%),radial-gradient(at 70% 80%,#50e3c21f,#0000 46%),linear-gradient(#2a1a4a 0%,#1a1230 55%,#12101c 100%);place-items:center;padding:24px;display:grid;position:fixed;inset:0}#boot-screen[hidden]{display:none!important}#boot-screen.is-done{opacity:0;pointer-events:none;transition:opacity .35s}.boot-card{text-align:center;width:min(420px,100%)}.boot-moon{background:radial-gradient(circle at 32% 32%,#ffe9a8,#f0d78c 55%,#c9a24a);border-radius:50%;width:56px;height:56px;margin:0 auto 18px;position:relative;box-shadow:0 0 28px #f0d78c8c}.boot-moon:after{content:"";background:#24183d;border-radius:50%;position:absolute;inset:8px -6px 8px 22px}#boot-title{letter-spacing:.02em;color:#fff4d0;text-shadow:0 2px 12px #00000073;margin:0 0 10px;font-size:clamp(26px,7vw,34px);font-weight:800}#boot-stage{color:#e8fff8;text-shadow:0 1px 8px #0006;margin:0 0 22px;font-size:clamp(17px,4.6vw,20px);font-weight:600;line-height:1.35}.boot-track{background:#ffffff1f;border:1px solid #50e3c259;border-radius:999px;height:12px;overflow:hidden}#boot-fill{background:linear-gradient(90deg,#7af0d8,#50e3c2 55%,#f0d78c);border-radius:999px;width:10%;height:100%;transition:width .35s;box-shadow:0 0 12px #50e3c2a6}.boot-spin{border:4px solid #50e3c2;border-color:#50e3c2 #f0d78c #f0d78c38 #f0d78c38;border-radius:50%;width:44px;height:44px;margin:22px auto 0;animation:.85s linear infinite boot-spin}@keyframes boot-spin{to{transform:rotate(360deg)}}#boot-fail[hidden],#boot-wait[hidden]{display:none!important}#boot-fail p{color:#fff8e8;margin:0 0 18px;font-size:18px;font-weight:600;line-height:1.4}#boot-retry{color:#1a1a2e;cursor:pointer;pointer-events:auto;touch-action:auto;background:linear-gradient(135deg,#50e3c2,#7af0d8);border:none;border-radius:999px;padding:14px 28px;font-size:18px;font-weight:800}</style>
+    <script type="module" crossorigin src="/witch-cove/assets/index-Bn__m5B4.js"></script>
+    <link rel="stylesheet" crossorigin href="/witch-cove/assets/index-DXsxkIX5.css">
   </head>
-  <body>
+  <body class="is-booting">
+    <div id="boot-screen" role="status" aria-live="polite" aria-busy="true">
+      <div class="boot-card">
+        <div class="boot-moon" aria-hidden="true"></div>
+        <h1 id="boot-title">Loading Witch Cove…</h1>
+        <div id="boot-wait">
+          <p id="boot-stage">Waking the cove…</p>
+          <div class="boot-track" aria-hidden="true"><div id="boot-fill"></div></div>
+          <div class="boot-spin" aria-hidden="true"></div>
+        </div>
+        <div id="boot-fail" hidden>
+          <p id="boot-fail-note">The cove didn’t wake. Tap Try again — we’ll walk the hills in a moment.</p>
+          <button id="boot-retry" type="button" onclick="window.__witchCoveRetry && window.__witchCoveRetry()">Try again</button>
+        </div>
+      </div>
+    </div>
     <div id="app">
       <canvas id="game-canvas"></canvas>
 
       <!-- Thin HUD — top meters never overlap the witch or each other -->
-      <div id="hud">
+      <div id="hud" hidden>
         <div id="hud-top">
           <div id="xp-panel" class="hud-panel">
             <div id="xp-label">XP <span id="xp-value">0</span> / <span id="xp-max">14000</span></div>
@@ -41,7 +57,7 @@
       </div>
 
       <!-- One bottom lane: toast OR Measure OR hint — never stacked over the witch -->
-      <div id="chrome-bottom">
+      <div id="chrome-bottom" hidden>
         <button id="wardrobe-btn" type="button" title="Wardrobe">Wardrobe</button>
         <div id="chrome-bottom-center">
           <div id="toast" hidden></div>
@@ -91,5 +107,57 @@
         </div>
       </div>
     </div>
+    <script>
+      window.__witchCove = { js: false, playable: false, beat: 0 }
+      window.__witchCoveRetry = function () {
+        var path = window.location.pathname || '/'
+        if (path.charAt(path.length - 1) !== '/' && path.indexOf('.') === -1) path += '/'
+        // Drop ?boot=fail and stale ?v= (query does not pin hashed JS). Bust HTML cache.
+        var url = path + '?r=' + Date.now()
+        try {
+          window.location.replace(url)
+        } catch (e) {
+          window.location.href = url
+        }
+      }
+      function showInlineBootFail() {
+        if (window.__witchCove.playable) return
+        var wait = document.getElementById('boot-wait')
+        var fail = document.getElementById('boot-fail')
+        var title = document.getElementById('boot-title')
+        var screen = document.getElementById('boot-screen')
+        if (wait) wait.hidden = true
+        if (fail) fail.hidden = false
+        if (title) title.textContent = 'The cove needs another try'
+        if (screen) {
+          screen.setAttribute('aria-busy', 'false')
+          screen.classList.add('is-fail')
+        }
+        var retry = document.getElementById('boot-retry')
+        if (retry) {
+          retry.onclick = function (ev) {
+            ev.preventDefault()
+            window.__witchCoveRetry()
+          }
+        }
+      }
+      // Bundle never arrived.
+      window.setTimeout(function () {
+        if (window.__witchCove.js || window.__witchCove.playable) return
+        showInlineBootFail()
+      }, 28000)
+      // JS marked alive but hills never finished. Skip if boot copy is still advancing.
+      window.setTimeout(function () {
+        if (window.__witchCove.playable) return
+        var beat = window.__witchCove.beat || 0
+        if (beat && Date.now() - beat < 16000) return
+        showInlineBootFail()
+      }, 38000)
+      window.addEventListener('pageshow', function (ev) {
+        if (ev.persisted && window.__witchCove && !window.__witchCove.playable) {
+          window.__witchCoveRetry()
+        }
+      })
+    </script>
   </body>
 </html>
