@@ -5,13 +5,14 @@
     <link rel="icon" type="image/svg+xml" href="/witch-cove/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Witch Cove — Measure the Tide Charm</title>
-    <script type="module" crossorigin src="/witch-cove/assets/index-C8blWGm0.js"></script>
-    <link rel="stylesheet" crossorigin href="/witch-cove/assets/index-I8aUYGqz.css">
+    <script type="module" crossorigin src="/witch-cove/assets/index-BQ_KYsKF.js"></script>
+    <link rel="stylesheet" crossorigin href="/witch-cove/assets/index-DgXo495Q.css">
   </head>
   <body>
     <div id="app">
       <canvas id="game-canvas"></canvas>
 
+      <!-- Thin HUD — top meters never overlap the witch or each other -->
       <div id="hud">
         <div id="hud-top">
           <div id="xp-panel" class="hud-panel">
@@ -37,9 +38,9 @@
             </div>
           </div>
         </div>
-
       </div>
 
+      <!-- One bottom lane: toast OR Measure OR hint — never stacked over the witch -->
       <div id="chrome-bottom">
         <button id="wardrobe-btn" type="button" title="Wardrobe">Wardrobe</button>
         <div id="chrome-bottom-center">
