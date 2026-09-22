@@ -15,8 +15,8 @@
       href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <script type="module" crossorigin src="/duplo-build/assets/index-BD0aq9QU.js"></script>
-    <link rel="stylesheet" crossorigin href="/duplo-build/assets/index-BbIMeSWw.css">
+    <script type="module" crossorigin src="/duplo-build/assets/index-B_6zOQ9W.js"></script>
+    <link rel="stylesheet" crossorigin href="/duplo-build/assets/index-7WkwqF_c.css">
   </head>
   <body>
     <canvas id="stage" aria-label="Brick building scene"></canvas>
@@ -42,7 +42,7 @@
 
       <footer class="dock">
         <div class="dock-main">
-          <div class="dock-row brick-picker-row">
+          <div class="dock-row picker-row">
             <span class="dock-label" id="brick-picker-label">Bricks</span>
             <div class="brick-picker" data-brick-picker>
               <button
@@ -70,15 +70,52 @@
                 ></div>
               </div>
             </div>
+            <div class="mode-switch" data-finish-modes role="tablist" aria-label="Color or sticker">
+              <button
+                type="button"
+                class="mode-tab"
+                id="finish-tab-color"
+                data-finish-mode="color"
+                role="tab"
+                aria-selected="true"
+                aria-controls="finish-panel-color"
+              >
+                Color
+              </button>
+              <button
+                type="button"
+                class="mode-tab"
+                id="finish-tab-sticker"
+                data-finish-mode="sticker"
+                role="tab"
+                aria-selected="false"
+                tabindex="-1"
+                aria-controls="finish-panel-sticker"
+              >
+                Sticker
+              </button>
+            </div>
           </div>
-          <div class="dock-row color-picker-row">
-            <span class="dock-label">Colors</span>
+          <div
+            id="finish-panel-color"
+            class="finish-panel"
+            data-finish-panel="color"
+            role="tabpanel"
+            aria-labelledby="finish-tab-color"
+          >
             <div class="color-row" data-colors></div>
           </div>
-          <div class="dock-row paint-picker-row">
-            <span class="dock-label" id="paint-picker-label">Paint</span>
+          <div
+            id="finish-panel-sticker"
+            class="finish-panel"
+            data-finish-panel="sticker"
+            role="tabpanel"
+            aria-labelledby="finish-tab-sticker"
+            hidden
+          >
             <div class="paint-picker">
-              <div class="paint-tabs" data-paint-tabs role="tablist" aria-labelledby="paint-picker-label">
+              <p class="paint-tip" data-paint-tip hidden>Faces fit 2×2 bricks</p>
+              <div class="paint-tabs" data-paint-tabs role="tablist" aria-label="Sticker kind">
                 <button
                   type="button"
                   class="paint-tab"
@@ -146,7 +183,6 @@
                   </div>
                 </div>
               </div>
-              <p class="paint-tip" data-paint-tip hidden>Faces fit 2×2 bricks</p>
             </div>
           </div>
         </div>
