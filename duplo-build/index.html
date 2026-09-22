@@ -15,8 +15,8 @@
       href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <script type="module" crossorigin src="/duplo-build/assets/index-B_XyBEz3.js"></script>
-    <link rel="stylesheet" crossorigin href="/duplo-build/assets/index-BsUlwToj.css">
+    <script type="module" crossorigin src="/duplo-build/assets/index-B0r-43lW.js"></script>
+    <link rel="stylesheet" crossorigin href="/duplo-build/assets/index-B9vK8fGK.css">
   </head>
   <body>
     <canvas id="stage" aria-label="Brick building scene"></canvas>
@@ -71,9 +71,16 @@
               </div>
             </div>
           </div>
-          <div class="dock-row">
+          <div class="dock-row color-picker-row">
             <span class="dock-label">Colors</span>
             <div class="color-row" data-colors></div>
+          </div>
+          <div class="dock-row paint-picker-row">
+            <span class="dock-label" id="paint-picker-label">Paint</span>
+            <div class="paint-picker">
+              <div class="face-row" data-paints role="group" aria-labelledby="paint-picker-label"></div>
+              <p class="paint-tip" data-paint-tip hidden>Faces go on brick sides</p>
+            </div>
           </div>
         </div>
         <p class="hint">
